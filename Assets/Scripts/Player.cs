@@ -10,6 +10,13 @@ public class Player : MonoBehaviour
     public bool isTop;
     public bool isBottom;
 
+    Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     private void Update()
     {
 
@@ -23,6 +30,11 @@ public class Player : MonoBehaviour
         Vector3 nextPos = new Vector3(h, v, 0) * speed * Time.deltaTime;
 
         transform.position = curPos + nextPos;
+
+        if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
+        {
+            anim.SetInteger("Input", (int)h);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
